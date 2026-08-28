@@ -72,8 +72,9 @@ class kmn_accounts(models.Model):
 
     def operations_compte_action(self):
         for obj in self:
-            list_view_id = self.env.ref('is_kmymoney18.kmn_account_move_tree_view_editable').id 
-            pivot_view_id = self.env.ref('is_kmymoney18.kmn_account_move_pivot_view').id 
+            list_view_id = self.env.ref('is_kmymoney18.kmn_account_move_tree_view_editable').id
+            pivot_view_id = self.env.ref('is_kmymoney18.kmn_account_move_pivot_view').id
+            graph_view_id = self.env.ref('is_kmymoney18.kmn_account_move_graph_view').id
             return {
                 'name': obj.name,
                 'res_model': 'kmn.account.move',
@@ -81,6 +82,26 @@ class kmn_accounts(models.Model):
                 'view_mode': 'list',
                 'domain' : ['|',('account1_id','=',obj.id),('account2_id','=',obj.id)],
                 'views': [
+                    [list_view_id, "list"],
+                    [pivot_view_id, "pivot"],
+                    [graph_view_id, "graph"]
+                ],
+            }
+
+
+    def graph_compte_action(self):
+        for obj in self:
+            list_view_id = self.env.ref('is_kmymoney18.kmn_account_move_tree_view_editable').id
+            pivot_view_id = self.env.ref('is_kmymoney18.kmn_account_move_pivot_view').id
+            graph_view_id = self.env.ref('is_kmymoney18.kmn_account_move_graph_view').id
+            return {
+                'name': obj.name,
+                'res_model': 'kmn.account.move',
+                'type': 'ir.actions.act_window',
+                'view_mode': 'graph',
+                'domain' : ['|',('account1_id','=',obj.id),('account2_id','=',obj.id)],
+                'views': [
+                    [graph_view_id, "graph"],
                     [list_view_id, "list"],
                     [pivot_view_id, "pivot"]
                 ],
@@ -180,7 +201,7 @@ class kmn_account_move(models.Model):
 
     def action_operations_tiers(self):
         for obj in self:
-            view_id = self.env.ref('is_kmymoney18.kmn_account_move_tree_view_editable').id 
+            view_id = self.env.ref('is_kmymoney18.kmn_account_move_tree_view_editable').id
             return {
                 'name': obj.payee_id.name,
                 'res_model': 'kmn.account.move',
@@ -188,6 +209,51 @@ class kmn_account_move(models.Model):
                 'view_mode': 'list',
                 'domain' : [('payee_id','=',obj.payee_id.id)],
                 'view_id': view_id,
+            }
+
+
+    def action_graph_compte(self):
+        context=self._context
+        active_id=False
+        if 'active_id' in context:
+            active_id=context["active_id"]
+        for obj in self:
+            list_view_id = self.env.ref('is_kmymoney18.kmn_account_move_tree_view_editable').id
+            pivot_view_id = self.env.ref('is_kmymoney18.kmn_account_move_pivot_view').id
+            graph_view_id = self.env.ref('is_kmymoney18.kmn_account_move_graph_view').id
+            return {
+                'name': obj.account_id.name,
+                'res_model': 'kmn.account.move',
+                'type': 'ir.actions.act_window',
+                'view_mode': 'graph',
+                'domain' : ['|',('account2_id','=',obj.account_id.id),('account1_id','=',obj.account_id.id)],
+                'context':{
+                    'active_id' : active_id
+                },
+                'views': [
+                    [graph_view_id, "graph"],
+                    [list_view_id, "list"],
+                    [pivot_view_id, "pivot"]
+                ],
+            }
+
+
+    def action_graph_tiers(self):
+        for obj in self:
+            list_view_id = self.env.ref('is_kmymoney18.kmn_account_move_tree_view_editable').id
+            pivot_view_id = self.env.ref('is_kmymoney18.kmn_account_move_pivot_view').id
+            graph_view_id = self.env.ref('is_kmymoney18.kmn_account_move_graph_view').id
+            return {
+                'name': obj.payee_id.name,
+                'res_model': 'kmn.account.move',
+                'type': 'ir.actions.act_window',
+                'view_mode': 'graph',
+                'domain' : [('payee_id','=',obj.payee_id.id)],
+                'views': [
+                    [graph_view_id, "graph"],
+                    [list_view_id, "list"],
+                    [pivot_view_id, "pivot"]
+                ],
             }
 
 

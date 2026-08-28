@@ -10,8 +10,10 @@
                 <button class="oe_inline oe_stat_button" title="Détail du mouvement"  name= "action_detail_mouvement" type="object" icon="fa-search-plus"/>
                 <field name="post_date" />
                 <button title="Opérations sur ce Tiers" name= "action_operations_tiers" type="object" icon="fa-list" />
+                <button title="Graphique par an sur ce Tiers" name= "action_graph_tiers" type="object" icon="fa-bar-chart" />
                 <field name="payee_id" widget="many2one_clickable"/>
                 <button title="Opérations sur ce compte" name= "action_operations_compte" type="object" icon="fa-list"/>
+                <button title="Graphique par an sur ce compte" name= "action_graph_compte" type="object" icon="fa-bar-chart" />
                 <field name="account_id" required="1" widget="many2one_clickable"/>
                 <field name="debit"  sum="Total"/>
                 <field name="credit" sum="Total"/>
@@ -33,6 +35,7 @@
             <list>
                 <field name="name" />
                 <button title="Opérations sur ce compte" name= "operations_compte_action" type="object" icon="fa-list"/>
+                <button title="Graphique par an sur ce compte" name= "graph_compte_action" type="object" icon="fa-bar-chart"/>
                 <field name="institution_id" />
                 <field name="parent_id" />
                 <field name="account_number" />
@@ -84,6 +87,7 @@
             <search>
                 <field name="name" />
                 <field name="institution_id" />
+                <field name="parent_id" />
                 <field name="parent_id" />
                 <field name="account_number" />
                 <field name="account_type_id" />
@@ -204,16 +208,16 @@
             </pivot>
         </field>
     </record>
-    <!-- <record id="is_account_invoice_line_graph" model="ir.ui.view">
-        <field name="name">is_account_invoice_line_graph</field>
-        <field name="model">is.account.invoice.line</field>
+    <record id="kmn_account_move_graph_view" model="ir.ui.view">
+        <field name="name">kmn_account_move_graph_view</field>
+        <field name="model">kmn.account.move</field>
         <field name="arch" type="xml">
-            <graph type="bar" orientation="vertical" stacked="False">
-                <field name="date_invoice"   type="row"/>
-                <field name="price_subtotal" type="measure"/>
+            <graph type="bar" string="Mouvements">
+                <field name="post_date" type="row" interval="year"/>
+                <field name="value" type="measure"/>
             </graph>
         </field>
-    </record> -->
+    </record>
 
 
     <record id="kmn_account_move_view_filter" model="ir.ui.view">
@@ -223,6 +227,8 @@
             <search>
                 <field name="payee_id" />
                 <field name="account_id" string="Compte"          filter_domain="['|',('account1_id', 'ilike', self),('account2_id', 'ilike', self)]"/>
+                <field name="account1_id" string="Compte 1"/>
+                <field name="account2_id" string="Compte 2"/>
                 <field name="account_id" string="Tous les champs" filter_domain="['|','|','|',('memo', 'ilike', self),('payee_id', 'ilike', self),('account1_id', 'ilike', self),('account2_id', 'ilike', self)]"/>
                 <field name="memo" />
                 <filter string="Brouillon" name="state_brouillon"   domain="[('state','=','brouillon')]"/>

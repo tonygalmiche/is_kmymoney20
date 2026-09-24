@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import tools
-from odoo import models,fields,api
-from odoo.tools.translate import _
+from odoo import models,fields
 
 
 class IsKmyMoneyReport(models.Model):
@@ -11,10 +10,10 @@ class IsKmyMoneyReport(models.Model):
     _order='id desc'
     _auto = False
 
-    account1_id       = fields.Many2one('kmn.accounts', u'Compte 1')
+    account1_id       = fields.Many2one('kmn.accounts', 'Compte 1')
     post_date         = fields.Date('Date')
-    partner_id        = fields.Many2one('res.partner', u'Tiers')
-    account2_id       = fields.Many2one('kmn.accounts', u'Compte 2')
+    partner_id        = fields.Many2one('res.partner', 'Tiers')
+    account2_id       = fields.Many2one('kmn.accounts', 'Compte 2')
     value             = fields.Float('Montant')
     cumul             = fields.Float('Cumul')
     memo              = fields.Text('Note')

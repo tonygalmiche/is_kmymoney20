@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import tools
-from odoo import models,fields,api
-from odoo.tools.translate import _
+from odoo import models,fields
 
 
 class SoldeParAnReport(models.Model):
@@ -11,9 +10,9 @@ class SoldeParAnReport(models.Model):
     _auto = False
     _rec_name = 'compte'
 
-    compte = fields.Char(u'Compte')
-    annee  = fields.Date(u'Année')
-    solde  = fields.Float(u'Solde', digits=(1, 0), readonly=True)
+    compte = fields.Char('Compte')
+    annee  = fields.Date('Année')
+    solde  = fields.Float('Solde', digits=(1, 0), readonly=True)
 
 
     def init(self):

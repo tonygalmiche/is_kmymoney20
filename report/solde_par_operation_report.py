@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import tools
-from odoo import models,fields,api
-from odoo.tools.translate import _
+from odoo import models,fields
 
 
 class SoldeParOperationReport(models.Model):

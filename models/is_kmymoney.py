@@ -1,18 +1,18 @@
 # -*- coding: utf-8 -*-
 from odoo import api, fields, models, _
-from datetime import datetime, timedelta
+from datetime import datetime
 
 
 class kmn_account_type(models.Model):
     _name = 'kmn.account.type'
-    _description = u"kMyMoney Accounts Type"
+    _description = "kMyMoney Accounts Type"
     
     name=fields.Char('Type de compte', required=True, index=True)
 
 
 class kmn_accounts(models.Model):
     _name = 'kmn.accounts'
-    _description = u"kMyMoney Accounts"
+    _description = "kMyMoney Accounts"
     _order = "name"
     
     def _bal_solde(self):
@@ -64,10 +64,10 @@ class kmn_accounts(models.Model):
 
 
     name                = fields.Char('Nom', required=True, index=True)
-    institution_id      = fields.Many2one('res.partner', u'Institution', index=True)
-    parent_id           = fields.Many2one('kmn.accounts', u'Compte parent', index=True)
+    institution_id      = fields.Many2one('res.partner', 'Institution', index=True)
+    parent_id           = fields.Many2one('kmn.accounts', 'Compte parent', index=True)
     account_number      = fields.Char('N° de compte', index=True)
-    account_type_id     = fields.Many2one('kmn.account.type', u'Type', index=True)
+    account_type_id     = fields.Many2one('kmn.account.type', 'Type', index=True)
     bal_solde           = fields.Float("Solde"                    , compute=_bal_solde)
     last_post_date      = fields.Date('Date dernier mouvement')
     active              = fields.Boolean('Actif', default=True, index=True)
@@ -116,7 +116,7 @@ class kmn_accounts(models.Model):
 
 class kmn_account_move(models.Model):
     _name = 'kmn.account.move'
-    _description = u"kMyMoney Accounts Move"
+    _description = "kMyMoney Accounts Move"
     
     _order='post_date desc, id desc'
     
@@ -352,7 +352,7 @@ class kmn_account_move(models.Model):
         return  account.last_post_date
 
 
-    payee_id          = fields.Many2one('res.partner', u'Tiers', index=True)
+    payee_id          = fields.Many2one('res.partner', 'Tiers', index=True)
     reconcile_date    = fields.Date('Date reconcile', index=True)
     action            = fields.Char('Action')
     reconcile_flag    = fields.Char('reconcile_flag')
@@ -361,14 +361,14 @@ class kmn_account_move(models.Model):
     credit            = fields.Float("Crédit", compute=_credit, inverse=_set_credit, readonly=False)
     solde             = fields.Float("Solde" , compute=_solde)
     memo              = fields.Text('Note')
-    account1_id       = fields.Many2one('kmn.accounts', u'Compte 1', index=True)
-    account2_id       = fields.Many2one('kmn.accounts', u'Compte 2', index=True)
-    account_id        = fields.Many2one('kmn.accounts', u'Compte', compute=_account_id, inverse=_set_account_id, readonly=False)
+    account1_id       = fields.Many2one('kmn.accounts', 'Compte 1', index=True)
+    account2_id       = fields.Many2one('kmn.accounts', 'Compte 2', index=True)
+    account_id        = fields.Many2one('kmn.accounts', 'Compte', compute=_account_id, inverse=_set_account_id, readonly=False)
     check_number      = fields.Char('check_number')
     post_date         = fields.Date('Date',default=_get_post_date, index=True)
     date_creation     = fields.Datetime('Date création'    , required=True, default=lambda self: fields.Datetime.now(), index=True)
     date_modification = fields.Datetime('Date modification', required=True, default=lambda self: fields.Datetime.now(), index=True)
-    state             = fields.Selection([('brouillon', u'Brouillon'),('valide', u'Validé')], u"État", readonly=True, index=True, default='brouillon')
+    state             = fields.Selection([('brouillon', 'Brouillon'),('valide', 'Validé')], "État", readonly=True, index=True, default='brouillon')
 
     def _set_last_post_date(self,vals):
         context = self.env.context

@@ -18,7 +18,7 @@
 ### Nettoyage
 
 4. [x] **`print()` de debug** dans `res_company.maj_objectifs` (`models/res_company.py`).
-5. [ ] **Imports inutilisés et préfixes `u''`** (`timedelta`, `api`, `_` dans les rapports…).
+5. [x] **Imports inutilisés et préfixes `u''`** (`timedelta`, `api`, `_` dans les rapports…).
 6. [ ] **Description fausse du modèle `is.kmymoney.report`** : « Suivi du temps par activité » (copier-coller).
 7. [ ] **Manifest et traductions** : description répétée (« Module Odoo 20 Module Odoo kMyMoney ») ; `i18n/fr.po` vide (à supprimer ou regénérer).
 8. [ ] **`DOCUMENTATION.md` à jour** : parle encore d'Odoo 18, de `ir.model.access.csv` et du script JS des graphiques.

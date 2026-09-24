@@ -27,6 +27,11 @@
 
 9. [x] **`parent_id=181` en dur** dans `_solde_all_account` (`models/is_kmymoney.py`) : 181 = compte racine « Actif » de la base v18, dont les 31 enfants sont exactement les comptes avec une institution. Remplacé par `institution_id is not null` (même critère que l'action Comptes et les rapports) → plus de dépendance aux ids. Calcul fait une seule fois au lieu d'une fois par compte.
 10. [ ] **Soldes calculés en une requête SQL par ligne** (`bal_solde`, `nb`, `solde`) : pas bloquant pour ce volume.
+    → **Non traité**. Mesures sur la base v18 (09/2026) : 15 357 opérations, 21 comptes bancaires actifs, 533 opérations par compte en moyenne.
+    - Liste des comptes : moins de 1 ms par compte, négligeable.
+    - Liste des opérations d'un compte : 2 requêtes par ligne pour `solde`, moins de 0,3 ms sur un compte moyen.
+    - ⚠ **AXA Compte Courant** (12 839 opérations, le compte le plus utilisé) : environ 7 ms par ligne, soit **environ 0,6 s par page de 80 lignes**. C'était déjà le cas en v18.
+    - Solution si cela devient gênant : calculer le cumul en une seule requête par page (fonction de fenêtre SQL). Risque : on touche au calcul du solde.
 
 ### Corrigé en cours de recette
 

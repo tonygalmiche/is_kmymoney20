@@ -267,7 +267,7 @@ class kmn_account_move(models.Model):
         context = self.env.context
         for obj in self:
             if obj.debit==0.0:
-                return
+                continue
             v=-float(obj.debit)
             if "active_id" in context:
                 if context["active_id"]==obj.account1_id.id:
@@ -293,7 +293,7 @@ class kmn_account_move(models.Model):
         context = self.env.context
         for obj in self:
             if obj.credit==0.0:
-                return
+                continue
             v=float(obj.credit)
             if "active_id" in context:
                 if context["active_id"]==obj.account1_id.id:

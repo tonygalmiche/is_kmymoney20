@@ -12,12 +12,12 @@
 ### Bugs latents (déjà présents en v18)
 
 1. [x] **`_get_post_date` plante hors d'un compte** (`models/is_kmymoney.py`) : lit `self.env.context["active_id"]` → `KeyError` si on crée une opération depuis le menu « Opérations ». Utiliser `.get("active_id")` avec un repli sur la date du jour.
-2. [ ] **`jour` dépend de la langue du serveur** (`models/is_suivi_sante.py`) : `strftime('%A')` renvoie « lundi » uniquement si le serveur est en `fr_FR` ; en anglais « Monday » → valeur hors sélection. Calculer avec `obj.name.weekday()` et `_JOURS`.
-3. [ ] **`return` dans la boucle de `_set_debit` / `_set_credit`** (`models/is_kmymoney.py`) : en édition multiple, les lignes suivant un montant à 0 ne sont pas traitées. Remplacer par `continue`.
+2. [x] **`jour` dépend de la langue du serveur** (`models/is_suivi_sante.py`) : `strftime('%A')` renvoie « lundi » uniquement si le serveur est en `fr_FR` ; en anglais « Monday » → valeur hors sélection. Calculer avec `obj.name.weekday()` et `_JOURS`.
+3. [x] **`return` dans la boucle de `_set_debit` / `_set_credit`** (`models/is_kmymoney.py`) : en édition multiple, les lignes suivant un montant à 0 ne sont pas traitées. Remplacer par `continue`.
 
 ### Nettoyage
 
-4. [ ] **`print()` de debug** dans `res_company.maj_objectifs` (`models/res_company.py`).
+4. [x] **`print()` de debug** dans `res_company.maj_objectifs` (`models/res_company.py`).
 5. [ ] **Imports inutilisés et préfixes `u''`** (`timedelta`, `api`, `_` dans les rapports…).
 6. [ ] **Description fausse du modèle `is.kmymoney.report`** : « Suivi du temps par activité » (copier-coller).
 7. [ ] **Manifest et traductions** : description répétée (« Module Odoo 20 Module Odoo kMyMoney ») ; `i18n/fr.po` vide (à supprimer ou regénérer).

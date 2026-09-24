@@ -14,7 +14,6 @@ class res_company(models.Model):
         for obj in self:
             lines=self.env['is.suivi.sante'].search([])
             for line in lines:
-                print(line,line.name.strftime('%A'))
                 line.poids_objectif = obj.is_poids_objectif
                 line.fc_r_objectif  = obj.is_fc_r_objectif
                 line.fc_s_objectif  = obj.is_fc_s_objectif

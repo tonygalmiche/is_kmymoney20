@@ -57,7 +57,7 @@ class is_suivi_sante(models.Model):
         for obj in self:
             jour=False
             if obj.name:
-                jour = obj.name.strftime('%A')
+                jour = _JOURS[obj.name.weekday()][0]
             obj.jour = jour 
 
     @api.depends('poids','poids_objectif')

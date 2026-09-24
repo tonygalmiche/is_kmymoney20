@@ -17,19 +17,25 @@ class kmn_accounts(models.Model):
     
     def _bal_solde(self):
         for obj in self:
-            self.env.cr.execute("select sum(value) from kmn_account_move where account1_id=%s", (obj.id,))
+            if not obj._origin.id:  # enregistrement pas encore créé (NewId)
+                obj.bal_solde = 0.0
+                continue
+            self.env.cr.execute("select sum(value) from kmn_account_move where account1_id=%s", (obj._origin.id,))
             x1 = self.env.cr.fetchone()[0] or 0.0
-            self.env.cr.execute("select sum(value) from kmn_account_move where account2_id=%s", (obj.id,))
+            self.env.cr.execute("select sum(value) from kmn_account_move where account2_id=%s", (obj._origin.id,))
             x2 = self.env.cr.fetchone()[0] or 0.0
             obj.bal_solde=x2-x1
 
 
     def _nb(self):
         for obj in self:
+            if not obj._origin.id:  # enregistrement pas encore créé (NewId)
+                obj.nb = 0
+                continue
             self.env.cr.execute("""
                 select count(*) 
                 from kmn_account_move 
-                where (account1_id=%s or account2_id=%s)""", (obj.id, obj.id))
+                where (account1_id=%s or account2_id=%s)""", (obj._origin.id, obj._origin.id))
             x = self.env.cr.fetchone()[0] or 0.0
             obj.nb=x
 
@@ -310,11 +316,14 @@ class kmn_account_move(models.Model):
     def _solde(self):
         context = self.env.context
         for obj in self:
+            obj.solde = 0.0
+            if not obj._origin.id:  # enregistrement pas encore créé (NewId)
+                continue
             if "active_id" in context:
                 account_id=context["active_id"]
-                self.env.cr.execute("select sum(value) from kmn_account_move where ((post_date<%s) or (post_date=%s and id<=%s)) and account1_id=%s", (obj.post_date, obj.post_date, obj.id, account_id))
+                self.env.cr.execute("select sum(value) from kmn_account_move where ((post_date<%s) or (post_date=%s and id<=%s)) and account1_id=%s", (obj.post_date, obj.post_date, obj._origin.id, account_id))
                 x1 = self.env.cr.fetchone()[0] or 0.0
-                self.env.cr.execute("select sum(value) from kmn_account_move where ((post_date<%s) or (post_date=%s and id<=%s)) and account2_id=%s", (obj.post_date, obj.post_date, obj.id, account_id))
+                self.env.cr.execute("select sum(value) from kmn_account_move where ((post_date<%s) or (post_date=%s and id<=%s)) and account2_id=%s", (obj.post_date, obj.post_date, obj._origin.id, account_id))
                 x2 = self.env.cr.fetchone()[0] or 0.0
                 solde = x2-x1
                 obj.solde = solde

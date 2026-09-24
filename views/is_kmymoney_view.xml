@@ -155,7 +155,6 @@
         <field name="name">kmn.account.move.tree.view</field>
         <field name="model">kmn.account.move</field>
         <field name="arch" type="xml">
-            <!-- colors="orange:state==False;red:state=='brouillon'" -->
             <list string="Mouvements" decoration-danger="state=='brouillon'">
                 <field name="post_date" />
                 <field name="payee_id" />
@@ -202,7 +201,6 @@
         <field name="model">kmn.account.move</field>
         <field name="arch" type="xml">
             <pivot>
-                <!-- <field name="date_invoice"   type="col"/> -->
                 <field name="post_date"     type="row"/>
                 <field name="value" type="measure"/>
             </pivot>

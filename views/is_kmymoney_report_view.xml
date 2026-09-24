@@ -61,7 +61,6 @@
         <field name="name">is_kmymoney_report_graph</field>
         <field name="model">is.kmymoney.report</field>
         <field name="arch" type="xml">
-            <!-- orientation="vertical"  -->
             <graph type="bar" stacked="False">
                 <field name="account1_id" type="row"/>
                 <field name="value"       type="measure"/>

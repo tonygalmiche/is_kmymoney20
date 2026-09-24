@@ -27,9 +27,4 @@
 
 /* Masquer le message d'alerte "trop de données" dans les graphiques avec o_graph_load_all */
 /* Note: Le message est maintenant évité via JavaScript en forçant le chargement de toutes les données */
-/*
-.o_graph_load_all .o_graph_alert {
-    display: none !important;
-}
-    */
 

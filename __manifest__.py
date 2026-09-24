@@ -27,7 +27,6 @@ InfoSaône - Module Odoo 18 Module Odoo kMyMoney
     'assets': {
         'web.assets_backend': [
             'is_kmymoney18/static/src/css/style.css',
-            # 'is_kmymoney18/static/src/js/graph_no_legend.js',
         ],
     },
     'installable': True,

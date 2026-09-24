@@ -22,7 +22,7 @@ class is_suivi_sante(models.Model):
     _name = 'is.suivi.sante'
     _description = "Suivi santé"
     _order = "name desc"
-    _sql_constraints = [('name_uniq','UNIQUE(name)', 'Cette date existe déjà')] 
+    _name_uniq = models.Constraint('UNIQUE(name)', 'Cette date existe déjà')
 
     name           = fields.Date(string="Date", required=True, index=True)
     jour           = fields.Selection(_JOURS, "Jour", store=True, compute='_compute_jour')

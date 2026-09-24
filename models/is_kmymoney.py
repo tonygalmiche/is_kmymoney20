@@ -72,9 +72,9 @@ class kmn_accounts(models.Model):
 
     def operations_compte_action(self):
         for obj in self:
-            list_view_id = self.env.ref('is_kmymoney18.kmn_account_move_tree_view_editable').id
-            pivot_view_id = self.env.ref('is_kmymoney18.kmn_account_move_pivot_view').id
-            graph_view_id = self.env.ref('is_kmymoney18.kmn_account_move_graph_view').id
+            list_view_id = self.env.ref('is_kmymoney20.kmn_account_move_tree_view_editable').id
+            pivot_view_id = self.env.ref('is_kmymoney20.kmn_account_move_pivot_view').id
+            graph_view_id = self.env.ref('is_kmymoney20.kmn_account_move_graph_view').id
             return {
                 'name': obj.name,
                 'res_model': 'kmn.account.move',
@@ -91,9 +91,9 @@ class kmn_accounts(models.Model):
 
     def graph_compte_action(self):
         for obj in self:
-            list_view_id = self.env.ref('is_kmymoney18.kmn_account_move_tree_view_editable').id
-            pivot_view_id = self.env.ref('is_kmymoney18.kmn_account_move_pivot_view').id
-            graph_view_id = self.env.ref('is_kmymoney18.kmn_account_move_graph_view').id
+            list_view_id = self.env.ref('is_kmymoney20.kmn_account_move_tree_view_editable').id
+            pivot_view_id = self.env.ref('is_kmymoney20.kmn_account_move_pivot_view').id
+            graph_view_id = self.env.ref('is_kmymoney20.kmn_account_move_graph_view').id
             return {
                 'name': obj.name,
                 'res_model': 'kmn.account.move',
@@ -135,7 +135,7 @@ class kmn_account_move(models.Model):
             self.env['kmn.account.move'].create(vals)
 
         if "active_id" in context:
-            action = self.env.ref('is_kmymoney18.kmn_account_move_action').sudo().read()[0]
+            action = self.env.ref('is_kmymoney20.kmn_account_move_action').sudo().read()[0]
             action["context"] = context
             return action
         return True
@@ -159,7 +159,7 @@ class kmn_account_move(models.Model):
 
 
     def action_detail_mouvement(self):
-        context=self._context
+        context=self.env.context
         if "active_id" in context:
             for obj in self:
                 account_id=obj.account2_id.id
@@ -176,13 +176,13 @@ class kmn_account_move(models.Model):
  
 
     def action_operations_compte(self):
-        context=self._context
+        context=self.env.context
         active_id=False
         if 'active_id' in context:
             active_id=context["active_id"]
         for obj in self:
-            list_view_id = self.env.ref('is_kmymoney18.kmn_account_move_tree_view_editable').id 
-            pivot_view_id = self.env.ref('is_kmymoney18.kmn_account_move_pivot_view').id 
+            list_view_id = self.env.ref('is_kmymoney20.kmn_account_move_tree_view_editable').id 
+            pivot_view_id = self.env.ref('is_kmymoney20.kmn_account_move_pivot_view').id 
             return {
                 'name': obj.account_id.name,
                 'res_model': 'kmn.account.move',
@@ -201,7 +201,7 @@ class kmn_account_move(models.Model):
 
     def action_operations_tiers(self):
         for obj in self:
-            view_id = self.env.ref('is_kmymoney18.kmn_account_move_tree_view_editable').id
+            view_id = self.env.ref('is_kmymoney20.kmn_account_move_tree_view_editable').id
             return {
                 'name': obj.payee_id.name,
                 'res_model': 'kmn.account.move',
@@ -213,14 +213,14 @@ class kmn_account_move(models.Model):
 
 
     def action_graph_compte(self):
-        context=self._context
+        context=self.env.context
         active_id=False
         if 'active_id' in context:
             active_id=context["active_id"]
         for obj in self:
-            list_view_id = self.env.ref('is_kmymoney18.kmn_account_move_tree_view_editable').id
-            pivot_view_id = self.env.ref('is_kmymoney18.kmn_account_move_pivot_view').id
-            graph_view_id = self.env.ref('is_kmymoney18.kmn_account_move_graph_view').id
+            list_view_id = self.env.ref('is_kmymoney20.kmn_account_move_tree_view_editable').id
+            pivot_view_id = self.env.ref('is_kmymoney20.kmn_account_move_pivot_view').id
+            graph_view_id = self.env.ref('is_kmymoney20.kmn_account_move_graph_view').id
             return {
                 'name': obj.account_id.name,
                 'res_model': 'kmn.account.move',
@@ -240,9 +240,9 @@ class kmn_account_move(models.Model):
 
     def action_graph_tiers(self):
         for obj in self:
-            list_view_id = self.env.ref('is_kmymoney18.kmn_account_move_tree_view_editable').id
-            pivot_view_id = self.env.ref('is_kmymoney18.kmn_account_move_pivot_view').id
-            graph_view_id = self.env.ref('is_kmymoney18.kmn_account_move_graph_view').id
+            list_view_id = self.env.ref('is_kmymoney20.kmn_account_move_tree_view_editable').id
+            pivot_view_id = self.env.ref('is_kmymoney20.kmn_account_move_pivot_view').id
+            graph_view_id = self.env.ref('is_kmymoney20.kmn_account_move_graph_view').id
             return {
                 'name': obj.payee_id.name,
                 'res_model': 'kmn.account.move',
@@ -337,7 +337,7 @@ class kmn_account_move(models.Model):
 
     def _get_post_date(self):
         obj = self.env['kmn.accounts']
-        account = obj.browse(self._context["active_id"])
+        account = obj.browse(self.env.context["active_id"])
         return  account.last_post_date
 
 
@@ -355,8 +355,8 @@ class kmn_account_move(models.Model):
     account_id        = fields.Many2one('kmn.accounts', u'Compte', compute=_account_id, inverse=_set_account_id, readonly=False)
     check_number      = fields.Char('check_number')
     post_date         = fields.Date('Date',default=_get_post_date, index=True)
-    date_creation     = fields.Datetime('Date création'    , required=True, default=lambda *a: fields.datetime.now(), index=True)
-    date_modification = fields.Datetime('Date modification', required=True, default=lambda *a: fields.datetime.now(), index=True)
+    date_creation     = fields.Datetime('Date création'    , required=True, default=lambda self: fields.Datetime.now(), index=True)
+    date_modification = fields.Datetime('Date modification', required=True, default=lambda self: fields.Datetime.now(), index=True)
     state             = fields.Selection([('brouillon', u'Brouillon'),('valide', u'Validé')], u"État", readonly=True, index=True, default='brouillon')
 
     def _set_last_post_date(self,vals):
@@ -380,7 +380,7 @@ class kmn_account_move(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
-        context=self._context
+        context=self.env.context
         for vals in vals_list:
 
             self._set_last_post_date(vals)

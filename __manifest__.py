@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 {
-    'name'     : 'InfoSaône - Module Odoo 18 kMyMoney',
-    'version'  : '18.0.0.1',
+    'name'     : 'InfoSaône - Module Odoo 20 kMyMoney',
+    'version'  : '20.0.0.1',
     'author'   : 'InfoSaône',
     'category' : 'InfoSaône',
     'description': """
-InfoSaône - Module Odoo 18 Module Odoo kMyMoney
+InfoSaône - Module Odoo 20 Module Odoo kMyMoney
 ===================================================
 """,
     'maintainer' : 'InfoSaône',
@@ -14,19 +14,19 @@ InfoSaône - Module Odoo 18 Module Odoo kMyMoney
         'base',
     ],
     'data' : [
-        'security/ir.model.access.csv',
-        'views/res_company_view.xml',
-        'views/is_kmymoney_view.xml',
-        'views/is_kmymoney_report_view.xml',
-        'views/is_suivi_sante_view.xml',
-        'report/solde_par_mois_report.xml',
-        'report/solde_par_an_report.xml',
-        'report/solde_par_operation_report.xml',
-        'views/menu.xml',
+        'security/ir.access.csv',
+        # 'views/res_company_view.xml',
+        # 'views/is_kmymoney_view.xml',
+        # 'views/is_kmymoney_report_view.xml',
+        # 'views/is_suivi_sante_view.xml',
+        # 'report/solde_par_mois_report.xml',
+        # 'report/solde_par_an_report.xml',
+        # 'report/solde_par_operation_report.xml',
+        # 'views/menu.xml',
     ],
     'assets': {
         'web.assets_backend': [
-            'is_kmymoney18/static/src/css/style.css',
+            'is_kmymoney20/static/src/css/style.css',
         ],
     },
     'installable': True,

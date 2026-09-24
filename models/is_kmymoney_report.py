@@ -5,7 +5,7 @@ from odoo import models,fields
 
 
 class IsKmyMoneyReport(models.Model):
-    _description = "Suivi du temps par activité"
+    _description = "Opérations par compte avec cumul"
     _name = 'is.kmymoney.report'
     _order='id desc'
     _auto = False

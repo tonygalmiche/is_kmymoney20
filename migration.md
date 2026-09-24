@@ -31,3 +31,4 @@
 ### Corrigé en cours de recette
 
 11. [x] **`can't adapt type 'NewId'`** sur `_nb` (et `_bal_solde`, `solde`) : les calculs SQL recevaient l'id temporaire d'un enregistrement pas encore créé (bouton « Nouveau », nouvelle ligne de liste éditable). Les requêtes utilisent `obj._origin.id` (id réel, aussi pendant l'édition d'un enregistrement existant) ; s'il est vide (enregistrement pas encore créé) → valeur 0. `_solde` affecte aussi 0 par défaut (il ne mettait rien hors d'un compte).
+12. [x] **Icônes des boutons invisibles** : en v20, `icon="…"` attend un nom Material Symbols (plus de Font Awesome). `fa-list` → `format_list_bulleted`, `fa-bar-chart` → `bar_chart`, `fa-search-plus` → `zoom_in`, `fa-check` → `check`.

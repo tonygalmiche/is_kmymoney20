@@ -21,10 +21,3 @@
     padding-top: 0 !important;
     padding-bottom: 0 !important;
 }
-
-/* Masquer la légende dans les graphiques avec la classe o_graph_no_legend */
-/* Note: La légende est maintenant masquée via JavaScript (graph_no_legend.js) */
-
-/* Masquer le message d'alerte "trop de données" dans les graphiques avec o_graph_load_all */
-/* Note: Le message est maintenant évité via JavaScript en forçant le chargement de toutes les données */
-

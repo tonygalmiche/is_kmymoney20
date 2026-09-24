@@ -53,7 +53,7 @@
                 <field name="solde" />
                 <filter string="Institution n'est pas définie" name="institution_non_definie" domain="[('institution_id','=',False)]"/>
                 <filter string="Institution est définie"       name="institution_definie"     domain="[('institution_id','!=',False)]"/>
-                <group expand="0" string="Regrouper par...">
+                <group>
                     <filter name="group_payee_id"   string="Tiers"   context="{'group_by':'payee_id'}"/>
                     <filter name="group_account_id" string="Compte"  context="{'group_by':'account_id'}"/>
                     <filter name="group_post_date"  string="Date"    context="{'group_by':'post_date'}"/>

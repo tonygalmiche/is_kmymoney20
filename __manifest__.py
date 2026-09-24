@@ -15,14 +15,14 @@ InfoSaône - Module Odoo 20 Module Odoo kMyMoney
     ],
     'data' : [
         'security/ir.access.csv',
-        # 'views/res_company_view.xml',
-        # 'views/is_kmymoney_view.xml',
-        # 'views/is_kmymoney_report_view.xml',
-        # 'views/is_suivi_sante_view.xml',
-        # 'report/solde_par_mois_report.xml',
-        # 'report/solde_par_an_report.xml',
-        # 'report/solde_par_operation_report.xml',
-        # 'views/menu.xml',
+        'views/res_company_view.xml',
+        'views/is_kmymoney_view.xml',
+        'views/is_kmymoney_report_view.xml',
+        'views/is_suivi_sante_view.xml',
+        'report/solde_par_mois_report.xml',
+        'report/solde_par_an_report.xml',
+        'report/solde_par_operation_report.xml',
+        'views/menu.xml',
     ],
     'assets': {
         'web.assets_backend': [

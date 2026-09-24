@@ -25,7 +25,7 @@
 
 ### À savoir
 
-9. [ ] **`parent_id=181` en dur** dans `_solde_all_account` (`models/is_kmymoney.py`) : id du compte parent de la base v18. Correct si les scripts de migration conservent les ids de `kmn_accounts` ; sinon le « Part sur ce compte » sera faux.
+9. [x] **`parent_id=181` en dur** dans `_solde_all_account` (`models/is_kmymoney.py`) : 181 = compte racine « Actif » de la base v18, dont les 31 enfants sont exactement les comptes avec une institution. Remplacé par `institution_id is not null` (même critère que l'action Comptes et les rapports) → plus de dépendance aux ids. Calcul fait une seule fois au lieu d'une fois par compte.
 10. [ ] **Soldes calculés en une requête SQL par ligne** (`bal_solde`, `nb`, `solde`) : pas bloquant pour ce volume.
 
 ### Corrigé en cours de recette

@@ -49,17 +49,19 @@ class kmn_accounts(models.Model):
 
 
     def _solde_all_account(self):
+        # Solde cumulé des comptes bancaires (comptes avec une institution),
+        # identique pour tous les comptes : calculé une seule fois
+        self.env.cr.execute("""
+            select sum(value)
+            from kmn_account_move ac inner join kmn_accounts a on ac.account1_id=a.id
+            where a.institution_id is not null """)
+        x1 = self.env.cr.fetchone()[0] or 0.0
+        self.env.cr.execute("""
+            select sum(value)
+            from kmn_account_move ac inner join kmn_accounts a on ac.account2_id=a.id
+            where a.institution_id is not null """)
+        x2 = self.env.cr.fetchone()[0] or 0.0
         for obj in self:
-            self.env.cr.execute("""
-                select sum(value) 
-                from kmn_account_move ac inner join kmn_accounts a on ac.account1_id=a.id
-                where a.parent_id=181 """)
-            x1 = self.env.cr.fetchone()[0] or 0.0
-            self.env.cr.execute("""
-                select sum(value) 
-                from kmn_account_move ac inner join kmn_accounts a on ac.account2_id=a.id
-                where a.parent_id=181 """)
-            x2 = self.env.cr.fetchone()[0] or 0.0
             obj.solde_all_account=x2-x1
 
 

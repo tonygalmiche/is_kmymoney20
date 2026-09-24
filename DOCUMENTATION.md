@@ -1,7 +1,7 @@
-# Module Odoo 18 kMyMoney
+# Module Odoo 20 kMyMoney
 
 ## Description
-Ce module permet de gérer les comptes bancaires et les opérations financières dans Odoo 18, en s'intégrant avec le logiciel kMyMoney.
+Ce module permet de gérer les comptes bancaires et les opérations financières dans Odoo 20, en s'intégrant avec le logiciel kMyMoney.
 
 ## Structure du module
 
@@ -48,6 +48,13 @@ Ce module permet de gérer les comptes bancaires et les opérations financières
   - `date_modification` : Date de modification
   - `state` : État (Brouillon/Validé)
 
+### Rapports (vues SQL, lecture seule)
+
+- `is.kmymoney.report` : opérations par compte avec cumul
+- `kmn.solde.par.mois.report` : solde par mois et par compte
+- `kmn.solde.par.an.report` : solde par an et par compte
+- `kmn.solde.par.operation.report` : solde par opération et par compte
+
 ## Fonctionnalités principales
 
 - Gestion des types de comptes
@@ -67,12 +74,11 @@ Ce module permet de gérer les comptes bancaires et les opérations financières
 
 ## Sécurité
 
-- Gestion des droits d'accès via `ir.model.access.csv`
+- Gestion des droits d'accès via `security/ir.access.csv`
 
 ## Assets
 
-- Feuille de style CSS
-- Script JavaScript pour les graphiques
+- Feuille de style CSS (hauteur des lignes des listes)
 
 ## Dépendances
 

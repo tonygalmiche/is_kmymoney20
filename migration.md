@@ -21,7 +21,7 @@
 5. [x] **Imports inutilisés et préfixes `u''`** (`timedelta`, `api`, `_` dans les rapports…).
 6. [x] **Description fausse du modèle `is.kmymoney.report`** : « Suivi du temps par activité » (copier-coller).
 7. [x] **Manifest et traductions** : description répétée (« Module Odoo 20 Module Odoo kMyMoney ») ; `i18n/fr.po` vide (à supprimer ou regénérer).
-8. [ ] **`DOCUMENTATION.md` à jour** : parle encore d'Odoo 18, de `ir.model.access.csv` et du script JS des graphiques.
+8. [x] **`DOCUMENTATION.md` à jour** : parle encore d'Odoo 18, de `ir.model.access.csv` et du script JS des graphiques.
 
 ### À savoir
 

@@ -5,8 +5,8 @@
     'author'   : 'InfoSaône',
     'category' : 'InfoSaône',
     'description': """
-InfoSaône - Module Odoo 20 Module Odoo kMyMoney
-===================================================
+InfoSaône - Module Odoo 20 kMyMoney
+===================================
 """,
     'maintainer' : 'InfoSaône',
     'website'    : 'http://www.infosaone.com',

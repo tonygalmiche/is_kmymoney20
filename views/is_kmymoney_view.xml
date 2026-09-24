@@ -11,10 +11,10 @@
                 <field name="post_date" />
                 <button title="Opérations sur ce Tiers" name= "action_operations_tiers" type="object" icon="fa-list" />
                 <button title="Graphique par an sur ce Tiers" name= "action_graph_tiers" type="object" icon="fa-bar-chart" />
-                <field name="payee_id"/>
+                <field name="payee_id" widget="many2one"/>
                 <button title="Opérations sur ce compte" name= "action_operations_compte" type="object" icon="fa-list"/>
                 <button title="Graphique par an sur ce compte" name= "action_graph_compte" type="object" icon="fa-bar-chart" />
-                <field name="account_id" required="1"/>
+                <field name="account_id" required="1" widget="many2one"/>
                 <field name="debit"  sum="Total"/>
                 <field name="credit" sum="Total"/>
                 <field name="solde"                />

@@ -345,8 +345,10 @@ class kmn_account_move(models.Model):
 
 
     def _get_post_date(self):
-        obj = self.env['kmn.accounts']
-        account = obj.browse(self.env.context["active_id"])
+        active_id = self.env.context.get("active_id")
+        if not active_id:  # création hors d'un compte (menu Opérations)
+            return fields.Date.context_today(self)
+        account = self.env['kmn.accounts'].browse(active_id)
         return  account.last_post_date
 
 

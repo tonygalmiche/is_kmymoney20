@@ -11,7 +11,7 @@
 
 ### Bugs latents (déjà présents en v18)
 
-1. [ ] **`_get_post_date` plante hors d'un compte** (`models/is_kmymoney.py`) : lit `self.env.context["active_id"]` → `KeyError` si on crée une opération depuis le menu « Opérations ». Utiliser `.get("active_id")` avec un repli sur la date du jour.
+1. [x] **`_get_post_date` plante hors d'un compte** (`models/is_kmymoney.py`) : lit `self.env.context["active_id"]` → `KeyError` si on crée une opération depuis le menu « Opérations ». Utiliser `.get("active_id")` avec un repli sur la date du jour.
 2. [ ] **`jour` dépend de la langue du serveur** (`models/is_suivi_sante.py`) : `strftime('%A')` renvoie « lundi » uniquement si le serveur est en `fr_FR` ; en anglais « Monday » → valeur hors sélection. Calculer avec `obj.name.weekday()` et `_JOURS`.
 3. [ ] **`return` dans la boucle de `_set_debit` / `_set_credit`** (`models/is_kmymoney.py`) : en édition multiple, les lignes suivant un montant à 0 ne sont pas traitées. Remplacer par `continue`.
 
